@@ -1,5 +1,5 @@
 {
-  "name": "react-table",
+  "name": "@spotware/react-table",
   "version": "6.8.6",
   "description": "A fast, lightweight, opinionated table and datagrid built on React",
   "license": "MIT",

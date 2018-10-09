@@ -1,6 +1,6 @@
 {
   "name": "@spotware/react-table",
-  "version": "6.8.6-spotware-patch-1",
+  "version": "6.8.6-spotware-patch-2",
   "description": "A fast, lightweight, opinionated table and datagrid built on React",
   "license": "MIT",
   "homepage": "https://github.com/react-tools/react-table#readme",

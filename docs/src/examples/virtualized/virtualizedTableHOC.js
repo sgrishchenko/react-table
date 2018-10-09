@@ -3,43 +3,34 @@ import { ReactTableDefaults } from "../../../../lib/index";
 import { List, AutoSizer } from "react-virtualized";
 import _ from "../../../../lib/utils";
 
-class TbodyComponent extends React.Component {
-
-  makePageRow = this.props.children()
-
-  render() {
-    const { rows, children: makePageRowFactory, ...restProps } = this.props;
-
-    const rowRenderer = ({ key, index, style }) => {
-      const rowInfo = rows[index];
-
-      return (
-        <div key={key} style={style}>
-          {this.makePageRow(rowInfo.row, rowInfo.index, rowInfo.path)}
-        </div>
-      );
-    };
+const TbodyComponent = props => {
+  const { rows, children: makePageRow, ...restProps } = props;
+  const rowRenderer = ({ key, index, style }) => {
+    const rowInfo = rows[index];
 
     return (
-      <ReactTableDefaults.TbodyComponent {...restProps}>
-        <AutoSizer>
-          {({ height, width }) => (
-            <List
-              width={width}
-              height={height}
-              rowCount={rows.length}
-              rowHeight={30}
-              rowRenderer={rowRenderer}
-              onRowsRendered={() => {
-                this.makePageRow = makePageRowFactory()
-              }}
-            />
-          )}
-        </AutoSizer>
-      </ReactTableDefaults.TbodyComponent>
+      <div key={key} style={style}>
+        {makePageRow(rowInfo.row, rowInfo.index, rowInfo.path, index)}
+      </div>
     );
-  }
-}
+  };
+
+  return (
+    <ReactTableDefaults.TbodyComponent {...restProps}>
+      <AutoSizer>
+        {({ height, width }) => (
+          <List
+            width={width}
+            height={height}
+            rowCount={rows.length}
+            rowHeight={30}
+            rowRenderer={rowRenderer}
+          />
+        )}
+      </AutoSizer>
+    </ReactTableDefaults.TbodyComponent>
+  );
+};
 
 export default Component => {
   return class RTVirtualizedTable extends React.Component {
